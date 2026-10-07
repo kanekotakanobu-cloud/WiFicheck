@@ -1,0 +1,12 @@
+name: build
+on:
+  push:
+  pull_request:
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sw_vers && swift --version
+      - run: ./scripts/build_app.sh
+      - run: plutil -lint build/WiFiSurvey.app/Contents/Info.plist && codesign -dv build/WiFiSurvey.app
