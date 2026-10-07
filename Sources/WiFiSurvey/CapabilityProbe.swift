@@ -36,7 +36,7 @@ enum CapabilityProbe {
             detail: "位置情報サービス全体: \(servicesOn ? "オン" : "オフ") / 本アプリ: \(locationLabel)"
         ))
 
-        let names = CWWiFiClient.interfaceNames() ?? []
+        let names = CWWiFiClient.shared().interfaces()?.compactMap { $0.interfaceName } ?? []
         let raw = WiFiReader.readRaw()
         let snap = WiFiReader.classify(raw, locationAuthorized: locationAuthorized)
 
